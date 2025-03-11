@@ -123,18 +123,19 @@ int main() {
 ### Задача 2.1
 #### Постановка задачи
 Вычислить используя цикл for координаты планеты Марс относительно Земли с течением времени t. Распечатать на экране координаты для каждой итерации по t. Координаты планеты Марс для каждой итерации задаются заданы формулами:
-x = r<sub>1</sub>cos(w_<sub>1</sub>t) - r_<sub>2</sub>cos(w_<sub>2</sub>t) \
-u = r_<sub>1</sub>sin(w_<sub>1</sub>t) - r_<sub>2</sub>sin(w_<sub>2</sub>t) \
-w_<sub>1</sub> = 2π / T<sub>1</sub> \
-w_<sub>2</sub> = 2π / T<sub>2</sub> 
+
+x = r<sub>1</sub>cos(w<sub>1</sub>t) - r<sub>2</sub>cos(w<sub>2</sub>t) \
+u = r<sub>1</sub>sin(w_<sub>1</sub>t) - r<sub>2</sub>sin(w<sub>2</sub>t) \
+w<sub>1</sub> = 2π / T<sub>1</sub> \
+w<sub>2</sub> = 2π / T<sub>2</sub> 
 
 где r1 – радиус орбиты Марса, r2 – радиус орбиты Земли, T1 и T2 — периоды обращения указанных планет соответственно, t – каждый заданный момент времени внутри цикла по времени. Подберите подходящие единицы измерения для времени и расстояния.
 #### Математическая модель
 
-x = r<sub>1</sub>cos(w_<sub>1</sub>t) - r_<sub>2</sub>cos(w_<sub>2</sub>t) \
-u = r_<sub>1</sub>sin(w_<sub>1</sub>t) - r_<sub>2</sub>sin(w_<sub>2</sub>t) \
-w_<sub>1</sub> = 2π / T<sub>1</sub> \
-w_<sub>2</sub> = 2π / T<sub>2</sub> 
+x = r<sub>1</sub>cos(w<sub>1</sub>t) - r_<sub>2</sub>cos(w<sub>2</sub>t) \
+u = r<sub>1</sub>sin(w<sub>1</sub>t) - r_<sub>2</sub>sin(w<sub>2</sub>t) \
+w<sub>1</sub> = 2π / T<sub>1</sub> \
+w<sub>2</sub> = 2π / T<sub>2</sub> 
 
 r<sub>1</sub> = 227.9e6, r<sub>2</sub> = 149.6e6 \
 T<sub>1</sub> = 687, T<sub>2</sub> = 365

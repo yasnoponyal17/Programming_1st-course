@@ -162,6 +162,9 @@ int main() {
     printf("Enter the number of array elements: ");
     scanf("%d", &n);
     int *A = (int *)malloc(n * sizeof(int));
+    if (A == NULL) {
+        return EXIT_FAILURE;
+        }
     int *p = A;
     for (int i = 0; i <= n - 1; i++) {
         printf("Enter the %d element: ", i+1);

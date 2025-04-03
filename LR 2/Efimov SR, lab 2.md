@@ -118,16 +118,23 @@ int main() {
     int n;
     printf("Enter the number of array elements: ");
     scanf("%d", &n);
+    
     double *A = (double *)malloc(n * sizeof(double));
+    if (A == NULL) {
+        return EXIT_FAILURE;
+    }
     double *p = A;
-    for (int i = 0; i <= n - 1; i++) {
-        printf("Enter the %d element: ", i+1);
+    for (int i = 0; i < n; i++) {
+        printf("Enter the %d element: ", i + 1);
         scanf("%lf", p++);
     }
+
     p = A;
-    for (int i = 0; i <= n - 1; i++) {
+    printf("Array elements: ");
+    for (int i = 0; i < n; i++) {
         printf("%.2lf ", *p++);
     }
+    printf("\n");
     free(A);
     return 0;
 }

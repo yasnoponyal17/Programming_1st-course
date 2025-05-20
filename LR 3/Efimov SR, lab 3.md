@@ -57,7 +57,6 @@ $$
 $$
 
 Модуль вектора
-
 $$
 \left| \overrightarrow{a} \right| =\sqrt{a^{2}_{x} + a^{2}_{y} + a^{2}_{z}}
 $$

@@ -125,6 +125,23 @@ $$
 exp(z) = 1 + z + \frac{1}{2!}z^2 + \frac{1}{3!}z^3 + \cdots + \frac{1}{n!}z^n
 $$
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| Complex | struct | Структура комплексного числа |
+| real | double | Реальная часть числа |
+| i | double | Вещественная часть числа |
+| z | struct Complex | Комплексная экспонента |
+| result | struct Complex | Результат |
+| term | struct Complex | Переменная для вычисления |
+| terms | int | Количество вычислений |
+| n | int | Шаг цикла |
+| temp_real | double | Временная переменная для реальной части числа |
+| temp_i | double | Временная переменная для вещественной части числа |
+
+
+
+
+
 
 #### Код программы
 ```c
@@ -170,7 +187,21 @@ int main() {
 - [https://en.cppreference.com/w/cpp/language/bit_field](https://en.cppreference.com/w/cpp/language/bit_field);
 - [https://en.wikipedia.org/wiki/Bit_field](https://en.wikipedia.org/wiki/Bit_field).
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| Date | struct | Структура даты рождения |
+| day | unsigned int | Поле структуры дня рождения |
+| month | unsigned int | Поле структуры месяца рождения |
+| year | unsigned int | Поле структуры года рождения |
+| birthday | struct Date | Дата рождения |
+| day | int | День рождения |
+| month | int | Месяц рождения |
+| year | int | Год рождения |
+
+
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -263,6 +294,12 @@ int main() {
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| Number | union | Объединение с числом |
+| number | union Number | Число |
+| pointer | union Number* | Указатель на число |
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -286,7 +323,18 @@ int main() {
 #### Постановка задачи
 Напишите программу, которая использует union для побайтовой распечатки типа unsigned long.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| ByteOutput | union | Объединение для побайтовой распечатки |
+| value | unsigned long | Начальное значение |
+| bytes | unsigned char | Размер значения |
+| data | union ByteOutput | Значение |
+| i | size_t | Шаг цикла |
+
+
+
 #### Код программы
 ```c
 #include <stdio.h>

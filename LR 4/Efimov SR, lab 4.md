@@ -8,18 +8,104 @@
 - функцию, которая вычисляет факториал, используя рекурсивный вызов самой себя.
 Продемонстрируйте работу обеих функций.
 #### Математическая модель
-#### Список идентификаторов
-#### Код программы
-#### Результат работы
 
+$$
+n! = (n - 1)! * n
+$$
+
+#### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| n | int | Число в функциях факториала |
+| result | unsigned long long | Результат в функциях факториала |
+| i | int | Шаг цикла в функции факториала |
+| number | int | Факториал |
+#### Код программы
+```c
+#include <stdio.h>
+
+unsigned long long factorial_loop(int n) {
+    if (n < 0) return 0;
+    unsigned long long result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+unsigned long long factorial_recursive(int n) {
+    if (n < 0) return 0;
+    if (n == 1 || n == 0) return 1;
+    return n * factorial_recursive(n - 1);
+}
+
+int main() {
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    printf("Result using loop: %llu\n", factorial_loop(number));
+    printf("Result using recursive: %llu\n", factorial_recursive(number));
+    return 0;
+}
+```
+#### Результат работы
+![Task 1.1](images/1.1.png)
 ### Задача 1.2
 #### Постановка задачи
  Объявите указатель на массив типа <span style='color: purple; font-weight: 700'>int</span> и динамически выделите память для 12-ти элементов. Напишите функцию, которая поменяет значения чётных и нечётных ячеек массива.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
-#### Результат работы
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
+void swapper(int *arr) {
+    for (int i = 0; i < 11; i += 2) {
+        int temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+    }
+}
+
+int main() {
+    int *arr;
+    int size = 12;
+
+    arr = (int *)malloc(size * sizeof(int));
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    printf("Enter %d integers for the array:\n", size);
+    for (int i = 0; i < size; i++) {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Initial array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    swapper(arr);
+    printf("Swapping array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    free(arr);
+
+    return 0;
+}
+```
+#### Результат работы
+![Task 1.2](images/1.2.png)
 ### Задача 1.3
 #### Постановка задачи
 Создать две основные функции:
@@ -88,3 +174,5 @@ ispunct). См. документацию по ссылке https://en.cppreferen
 #### Список идентификаторов
 #### Код программы
 #### Результат работы
+
+### Ефимов Сергей Робертович, 1 курс, ИВТ-2, подгруппа 3

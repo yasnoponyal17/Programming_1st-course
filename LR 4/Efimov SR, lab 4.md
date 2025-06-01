@@ -57,6 +57,12 @@ int main() {
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| arr | int* | Указатель на массив чисел |
+| temp | int | Временная переменная для правильной перестановки чисел |
+| size | int | Размер массива |
+| i | int | Шаг цикла |
 #### Код программы
 ```c
 #include <stdio.h>
@@ -119,6 +125,16 @@ int main() {
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| matrix | double** | Указатель на матрицу |
+| rows | int | Количество строк матрицы |
+| cols | int | Количество столбцов матрицы |
+| i | int | Шаг цикла |
+| j | int | Шаг цикла |
+
+
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -195,6 +211,13 @@ int main() {
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| vec1 | double* | Указатель на 1 вектор |
+| vec2 | double* | Указатель на 2 вектор |
+| result | double* | Указатель на результат произведения |
+
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -260,6 +283,25 @@ https://en.cppreference.com/w/c/string/byte.
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| str | char* | Указатель на строку |
+| i | int | Шаг цикла |
+| string | char | Строка |
+| string_length | int | Длина строки |
+| ptr | char* | Указатель на строку |
+| string_length_ptr | int | Длина строки, используя указатель |
+| string_length_strlen | size_t | Длина строки, используя strlen |
+| string_copy | char | Копия строки |
+| first_string | char | Первая строка для конкатинации строк |
+| second_string | char | Вторая строка для конкатинации строк |
+| cmp_first_string | char | Первая строка для сравнения строк |
+| cmp_second_string | char | Вторая строка для сравнения строк |
+| cmp_result | char | Результат сравнения строк |
+| case_string | char | Строка для 7 пункта |
+| lower_string | char | Нижний регистр case_string |
+| upper_string | char | Верхний регистр case_string |
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -355,6 +397,13 @@ https://en.cppreference.com/w/c/string/byte.
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| float_string | char | Строка с числом с плавающей точкой |
+| int_string | char | Строка с целым числом |
+| float_value | double | Значение числа с плавающей точкой |
+| int_value | int | Значение целого числа |
+
 #### Код программы
 ```c
 #include <stdio.h>
@@ -390,7 +439,59 @@ int main() {
 #### Математическая модель
 Отсутствует
 #### Список идентификаторов
+| Имя | Тип | Смысл |
+| - | - | - |
+| string | char | Строка, вводимая с клавиатуры |
+| string_length | char | Длина строки |
+| i | size_t | Шаг цикла |
+
 #### Код программы
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MIN_SIZE 10
+#define MAX_SIZE 20
+
+int main() {
+    char string[MAX_SIZE];
+    printf("Enter a string: ");
+    fgets(string, MAX_SIZE, stdin);
+    
+    char string_length = strlen(string);
+    if (string_length < MIN_SIZE || string_length > MAX_SIZE ) {
+        printf("Error! Your string length is not suitable.");
+        return 1;
+    }
+    
+    for (size_t i = 0; i < string_length - 1; i++) {
+        printf("Character '%c' (position %zu): ", string[i], i + 1);
+        if (isdigit(string[i])) {
+            printf("digit\n");
+        }
+        if (isalpha(string[i])) {
+            if (isupper(string[i])) {
+                printf("uppercase letter\n");
+            }
+            if (islower(string[i])) {
+                printf("lowercase letter\n");
+            }
+        }
+        if (isspace(string[i])) {
+            printf("whitespace\n");
+        }
+        if (ispunct(string[i])) {
+            printf("punctuation mark\n");
+        }
+        if (!isdigit(string[i]) && !isalpha(string[i]) && !isspace(string[i]) && !ispunct(string[i])) {
+            printf("unknown character\n");
+        }
+        printf("\n");
+    }
+}
+```
 #### Результат работы
+![Task 2.3](images/2.3.png)
 
 ### Ефимов Сергей Робертович, 1 курс, ИВТ-2, подгруппа 3

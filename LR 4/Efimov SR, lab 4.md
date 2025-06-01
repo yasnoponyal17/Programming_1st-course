@@ -193,10 +193,50 @@ int main() {
 Создать функцию, которая вычисляет векторное произведение двух
 векторов в декартовых координатах, используя указатели на соответствующие массивы.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
-#### Результат работы
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
+void cross_product(double *vec1, double *vec2, double *result) {
+    result[0] = vec1[1] * vec2[2] - vec1[2] * vec2[1];
+    result[1] = vec1[2] * vec2[0] - vec1[0] * vec2[2]; 
+    result[2] = vec1[0] * vec2[1] - vec1[1] * vec2[0]; 
+}
+
+int main() {
+    double *vec1 = (double *)malloc(3 * sizeof(double));
+    double *vec2 = (double *)malloc(3 * sizeof(double));
+    double *result = (double *)malloc(3 * sizeof(double));
+
+    if (vec1 == NULL || vec2 == NULL || result == NULL) {
+        free(vec1);
+        free(vec2);
+        free(result);
+        return 1;
+    }
+
+    printf("Enter coordinates for 1 vector (x y z): ");
+    scanf("%lf %lf %lf", &vec1[0], &vec1[1], &vec1[2]);
+
+    printf("Enter coordinates for 2 vector (x y z): ");
+    scanf("%lf %lf %lf", &vec2[0], &vec2[1], &vec2[2]);
+
+    cross_product(vec1, vec2, result);
+
+    printf("Result: (%.2f, %.2f, %.2f)\n", result[0], result[1], result[2]);
+
+    free(vec1);
+    free(vec2);
+    free(result);
+
+    return 0;
+}
+```
+#### Результат работы
+![Task 1.4](images/1.4.png)
 ### Комплект 2: Базовые операции со строками
 ### Задача 2.1
 #### Постановка задачи
@@ -218,26 +258,137 @@ int main() {
 однобайтовые строковые функции по ссылке
 https://en.cppreference.com/w/c/string/byte.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
-#### Результат работы
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
+#define SIZE 15
+
+void lowercase(char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = tolower(str[i]);
+    }
+}
+
+void uppercase(char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+int main() {
+    char string[SIZE];
+    printf("Enter a string (Max 10 symbols): ");
+    fgets(string, SIZE, stdin);
+    
+    // 1 Пункт
+    int string_length = 0;
+    for (int i = 0; string[i] != '\0'; i++) {
+        string_length += 1;
+    }
+    printf("String length (using loop 'for'): %d\n", string_length);
+    
+    // 2 Пункт
+    int string_length_ptr = 0;
+    char *ptr = string;
+    while (*ptr++ != '\0') {
+        string_length_ptr += 1;
+    }
+    printf("String length (using pointer): %d\n", string_length_ptr);
+   
+    // 3 Пункт
+    size_t string_length_strlen = strlen(string);
+    printf("String length (using strlen): %zu\n", string_length_strlen);
+    
+    // 4 Пункт
+    char string_copy[SIZE];
+    strcpy(string_copy, string);
+    printf("Copied string: %s", string_copy);
+    
+    // 5 Пункт
+    char first_string[SIZE] = "Sergei";
+    char second_string[] = " Efimov";
+    strcat(first_string, second_string);
+    printf("Concatenated string: %s\n", first_string);
+    
+    // 6 Пункт
+    char cmp_first_string[] = "What is the ekum?";
+    char cmp_second_string[] = "Who knows? Who knows?";
+    int cmp_result = strcmp(cmp_first_string, cmp_second_string);
+    printf("Comparison of '%s' and '%s': %d\n", cmp_first_string, cmp_second_string, cmp_result);
+    if (cmp_result < 0) {
+        printf("'%s' is less than '%s'\n", cmp_first_string, cmp_second_string);
+    }
+    if (cmp_result == 0) {
+        printf("'%s' is equal to '%s'\n", cmp_first_string, cmp_second_string);
+    }
+    if (cmp_result > 0) {
+        printf("'%s' is greater than '%s'\n", cmp_first_string, cmp_second_string);
+    }
+    
+    // 7 Пункт
+    char case_string[] = "OMG NoScope";
+    char lower_string[SIZE];
+    char upper_string[SIZE];
+    strcpy(lower_string, case_string);
+    strcpy(upper_string, case_string);
+    lowercase(lower_string);
+    uppercase(upper_string);
+    printf("Initial string: %s\n", case_string);
+    printf("Lowercase string: %s\n", lower_string);
+    printf("Uppercase string: %s\n", upper_string);
+    return 0;
+}
+```
+#### Результат работы
+![Task 2.1](images/2.1.png)
 ### Задача 2.2
 #### Постановка задачи
 Конвертируйте введённые заданные как строки: число с плавающей
-точкой (double) и целое число (int) в значения типаdouble и int, используя функциями atof и atoi. См. документацию по ссылке
+точкой (double) и целое число (int) в значения типа double и int, используя функциями atof и atoi. См. документацию по ссылке
 https://en.cppreference.com/w/c/string/byte.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
-#### Результат работы
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#define SIZE 20
+
+int main() {
+    char float_string[SIZE];
+    char int_string[SIZE];
+    
+    printf("Enter a float type number: ");
+    fgets(float_string, SIZE, stdin);
+    
+    printf("Enter an integer type number: ");
+    fgets(int_string, SIZE, stdin);
+    
+    double float_value = atof(float_string);
+    printf("Converted float type string to double: %.2f\n", float_value);
+    
+    int int_value = atoi(int_string);
+    printf("Converted integer type string to int: %d\n", int_value);
+    
+    return 0;
+}
+```
+#### Результат работы
+![Task 2.2](images/2.2.png)
 ### Задача 2.3
 #### Постановка задачи
-Создайте строку от 10 до 20 символов, используя только цифры, латинский буквы в разных регистрах пробельные символы и символы
-пунктуации. Организуйте цикл, где каждый символ подробно тестируется функциями типа int is∗(/∗... ∗/) (например — isdigit,
-ispunct). См. документацию по ссылке https://en.cppreference.com/w/c/string/byte. Оформите распечатку информации по каждому символу в виде списка на экране, чтобы можно было прочесть информацию о том что представляет из себя каждый символ (своими словами, в свободной форме). Постарайтесь использовать только латиницу.
+Создайте строку от 10 до 20 символов, используя только цифры, латинский буквы в разных регистрах пробельные символы и символы пунктуации. Организуйте цикл, где каждый символ подробно тестируется функциями типа int is∗(/∗... ∗/) (например — isdigit, ispunct). См. документацию по ссылке https://en.cppreference.com/w/c/string/byte. Оформите распечатку информации по каждому символу в виде списка на экране, чтобы можно было прочесть информацию о том что представляет из себя каждый символ (своими словами, в свободной форме). Постарайтесь использовать только латиницу.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
 #### Результат работы

@@ -117,10 +117,77 @@ int main() {
 - функцию для распечатки этой матрицы на экране.
 Продемонстрировать работу всех этих функций в своей программе.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
-#### Результат работы
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
+double** allocate_matrix(int rows, int cols) {
+    double** matrix = (double**)malloc(rows * sizeof(double*));
+    if (matrix == NULL) {
+        return NULL;
+    }
+    
+    for (int i = 0; i < rows; i++) {
+        matrix[i] = (double*)malloc(cols * sizeof(double));
+        if (matrix[i] == NULL) {
+            for (int j = 0; j < i; j++) {
+                free(matrix[j]);
+            }
+            free(matrix);
+            return NULL;
+        }
+    }
+    return matrix;
+}
+
+
+void free_matrix(double** matrix, int rows) {
+    if (matrix == NULL) return;
+    for (int i = 0; i < rows; i++) {
+        free(matrix[i]); 
+    }
+    free(matrix); 
+}
+
+void fill_matrix(double** matrix, int rows, int cols) {
+    printf("Enter elements for the %dx%d matrix A:\n", rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("Element a%d%d: ", i + 1, j + 1);
+            scanf("%lf", &matrix[i][j]);
+        }
+    }
+}
+
+void print_matrix(double** matrix, int rows, int cols) {
+    printf("Matrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%8.2f ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int rows, cols;
+    rows = 3;
+    cols = 3;
+    
+    double** matrix = allocate_matrix(rows, cols);
+    
+    fill_matrix(matrix, rows, cols);
+    print_matrix(matrix, rows, cols);
+    free_matrix(matrix, rows);
+    
+    return 0;
+}
+```
+#### Результат работы
+![Task 1.3](images/1.3.png)
 ### Задача 1.4
 #### Постановка задачи
 Создать функцию, которая вычисляет векторное произведение двух

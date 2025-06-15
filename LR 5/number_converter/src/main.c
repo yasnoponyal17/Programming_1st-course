@@ -4,11 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// #ifdef DEBUG
-// #define DEBUG_PRINT(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
-// #else
-// #define DEBUG_PRINT(fmt, ...) do {} while (0)
-// #endif
 
 int main() {
     char number_str[65];
@@ -33,7 +28,7 @@ int main() {
 
         long decimal_value = base_to_decimal(number_str, from_base);
         if (decimal_value == 0 && number_str[0] != '0') {
-            continue; // Ошибка уже выведена в base_to_decimal
+            continue;
         }
 
         char* result = decimal_to_base(decimal_value, to_base, result_buffer, sizeof(result_buffer));

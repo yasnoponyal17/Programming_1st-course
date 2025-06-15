@@ -245,9 +245,92 @@ Category для категорий товаров. Напишите метод �
 ассоциированную функцию для подсчета общей суммы товаров в заданной категории из
 массива продуктов.
 #### Математическая модель
+Отсутствует
 #### Список идентификаторов
 #### Код программы
+```Rust
+#[derive(Debug, PartialEq)]
+enum Category {
+    Electronics,
+    Clothing,
+    Food,
+}
+
+#[derive(Debug)]
+struct Product {
+    name: String,
+    price: f64,
+    category: Category,
+}
+
+impl Product {
+    fn display_info(&self) {
+        println!(
+            "Продукт: {}, Цена: {:.2}, Категория: {:?}", 
+            self.name, self.price, self.category
+        );
+    }
+}
+
+fn total_price_by_category(products: &[Product], category: Category) -> f64 {
+    products
+        .iter()
+        .filter(|product| product.category == category)
+        .map(|product| product.price)
+        .sum()
+}
+
+fn main() {
+    let products = [
+        Product {
+            name: String::from("Iphone 16 Pro Max 1 ТБ"),
+            price: 169990.00,
+            category: Category::Electronics,
+        },
+        Product {
+            name: String::from("Футболка 'Для Общего Вреда'"),
+            price: 6000.00,
+            category: Category::Clothing,
+        },
+        Product {
+            name: String::from("Чебупицца Курочка по-итальянски"),
+            price: 180.00,
+            category: Category::Food,
+        },
+        Product {
+            name: String::from("MacBook Air M4 512 ГБ"),
+            price: 179990.00,
+            category: Category::Electronics,
+        },
+        Product {
+            name: String::from("Чипсы Lays с крабом"),
+            price: 169.00,
+            category: Category::Food,
+        },
+    ];
+
+    println!("Информация о продуктах:");
+    for product in products.iter() {
+        product.display_info();
+    }
+
+    println!("\nОбщая сумма по категориям:");
+    println!(
+        "Электроника: ₽{:.2}",
+        total_price_by_category(&products, Category::Electronics)
+    );
+    println!(
+        "Одежда: ₽{:.2}",
+        total_price_by_category(&products, Category::Clothing)
+    );
+    println!(
+        "Еда: ₽{:.2}",
+        total_price_by_category(&products, Category::Food)
+    );
+}
+```
 #### Результат работы
+![Task 7](images/rust%207.png)
 
 ### Задача 8
 #### Постановка задачи
@@ -258,6 +341,80 @@ Position для должностей сотрудников. Напишите ф
 Отсуствует
 #### Список идентификаторов
 #### Код программы
+```Rust
+#[derive(Debug, PartialEq, Clone)]
+enum Position {
+    Artist,
+    DJ,
+    Designer,
+    Producer,
+}
+
+#[derive(Debug, Clone)]
+struct Employee {
+    name: String,
+    position: Position,
+    salary: f64,
+}
+
+fn filter_by_position(employees: &Vec<Employee>, position: Position) -> Vec<Employee> {
+    employees
+        .iter()
+        .filter(|employee| employee.position == position)
+        .cloned()
+        .collect()
+}
+
+fn main() {
+    let employees = vec![
+        Employee {
+            name: String::from("Платина"),
+            position: Position::Artist,
+            salary: 250000.00,
+        },
+        Employee {
+            name: String::from("DJ Ekler"),
+            position: Position::DJ,
+            salary: 150000.00,
+        },
+        Employee {
+            name: String::from("Nest"),
+            position: Position::Producer,
+            salary: 100000.00,
+        },
+        Employee {
+            name: String::from("Октябрь"),
+            position: Position::Designer,
+            salary: 180000.00,
+        },
+    ];
+
+    let artists = filter_by_position(&employees, Position::Artist);
+    println!("Артисты:");
+    for art in &artists {
+        println!("Имя: {}, Зарплата: ₽{:.2}, Должность: {:?}", art.name, art.salary, art.position);
+    }
+
+    let djs = filter_by_position(&employees, Position::DJ);
+    println!("\nDJ:");
+    for dj in &djs {
+        println!("Имя: {}, Зарплата: ₽{:.2}, Должность: {:?}", dj.name, dj.salary, dj.position);
+    }
+
+    let producers = filter_by_position(&employees, Position::Producer);
+    println!("\nПродюсеры:");
+    for prod in &producers {
+        println!("Имя: {}, Зарплата: ₽{:.2}, Должность: {:?}", prod.name, prod.salary, prod.position);
+    }
+    
+    let designers = filter_by_position(&employees, Position::Designer);
+    println!("\nДизайнеры:");
+    for design in &designers {
+        println!("Имя: {}, Зарплата: ₽{:.2}, Должность: {:?}", design.name, design.salary, design.position);
+    }
+}
+```
 #### Результат работы
+![Task 8](images/rust%208.png)
 
 ### Ефимов Сергей Робертович, 1 курс, ИВТ-2, подгруппа 3

@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifdef DEBUG
+#define DEBUG_PRINT(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
+#else
+#define DEBUG_PRINT(fmt, ...) do {} while (0)
+#endif
 
 int main() {
     char number_str[65];

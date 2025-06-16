@@ -15,7 +15,7 @@ char* decimal_to_base(long decimal_value, int base, char* result_buffer, int buf
     }
 
     char digits[] = "0123456789ABCDEF";
-    char temp_buffer[65]; // Достаточно для 64-битного числа
+    char temp_buffer[65];
     int i = 0;
     int is_negative = decimal_value < 0;
 

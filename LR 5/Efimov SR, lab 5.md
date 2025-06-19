@@ -14,6 +14,17 @@
 - validator.c / validator.h
 - ui_handler.c / ui_handler.h
 - main.c
+#### converter.h
+```c
+#ifndef CONVERTER_H
+#define CONVERTER_H
+
+char* decimal_to_base(long decimal_value, int base, char* result_buffer, int buffer_size);
+
+long base_to_decimal(const char* number_str, int base);
+
+#endif 
+```
 #### converter.c
 ```c
 #include "converter.h"
@@ -100,6 +111,15 @@ long base_to_decimal(const char* number_str, int base) {
     return is_negative ? -decimal_value : decimal_value;
 }
 ```
+#### validator.h
+```c
+#ifndef VALIDATOR_H
+#define VALIDATOR_H
+
+int is_valid_number(const char* number_str, int base);
+
+#endif
+```
 #### validator.c
 ```c
 #include "validator.h"
@@ -135,6 +155,17 @@ int is_valid_number(const char* number_str, int base) {
 
     return 1;
 }
+```
+#### ui_handler.h
+```c
+#ifndef UI_HANDLER_H
+#define UI_HANDLER_H
+
+void get_user_input(char* number_str, int max_len, int* from_base, int* to_base);
+
+void display_result(const char* number_str, int from_base, int to_base, const char* result);
+
+#endif
 ```
 #### ui_handler.c
 ```c
@@ -207,9 +238,7 @@ int main() {
 ```make
 CC = gcc
 CFLAGS = -Wall -g
-ifdef DEBUG
-CFLAGS += -DDEBUG
-endif
+
 TARGET = number_converter
 SRCDIR = src
 INCDIR = include
@@ -226,7 +255,11 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
 clean:
-	del /Q $(OBJECTS) $(TARGET).exe 2>nul || rm -f $(OBJECTS) $(TARGET)
+ifeq ($(OS),Windows_NT)
+	@del /Q $(subst /,\,$(OBJECTS)) $(TARGET).exe 2>nul
+else
+	@rm -f $(OBJECTS) $(TARGET)
+endif
 
 .PHONY: all clean
 ```
@@ -262,6 +295,6 @@ executable('number_converter',
 ```
 
 #### Результат работы
-![Result](images/lr%205.png)
+![Result](images/lr%205%20update.png)
 
 ### Ефимов Сергей Робертович, 1 курс, ИВТ-2, подгруппа 3

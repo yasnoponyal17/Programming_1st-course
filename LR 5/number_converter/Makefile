@@ -1,8 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g
-ifdef DEBUG
-CFLAGS += -DDEBUG
-endif
+
 TARGET = number_converter
 SRCDIR = src
 INCDIR = include
@@ -19,6 +17,10 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
 clean:
-	del /Q $(OBJECTS) $(TARGET).exe 2>nul || rm -f $(OBJECTS) $(TARGET)
+ifeq ($(OS),Windows_NT)
+	@del /Q $(subst /,\,$(OBJECTS)) $(TARGET).exe 2>nul
+else
+	@rm -f $(OBJECTS) $(TARGET)
+endif
 
 .PHONY: all clean
